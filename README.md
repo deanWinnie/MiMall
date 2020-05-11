@@ -1,24 +1,5 @@
-# mall
+#1、前端跨域
+浏览器请求必须遵循同源策略：同域名、同端口、同协议
 
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+CORS跨域-服务端设置，前端不需要设置，直接调用  
+说明：后台允许某个站点进行访问
