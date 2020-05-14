@@ -4,25 +4,22 @@
   </div>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+import storage from './storage/index.js'
+export default {
+  name:'app',
+  components:{
 
-#nav {
-  padding: 30px;
+  },
+  data(){
+    return{
+    }
+  },
+  mounted(){
+    storage.setItem('a',1,'user')
+    storage.clear('a','user');
+    console.log(storage.getItem('user'));
+  },
+  
 }
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
+</script>
