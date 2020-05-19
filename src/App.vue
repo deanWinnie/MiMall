@@ -16,8 +16,8 @@ export default {
     }
   },
   mounted(){
-    storage.setItem('a',1,'user')
-    storage.clear('a','user');
+    // storage.setItem('a',1,'user')
+    // storage.clear('a','user');
     console.log(storage.getItem('user'));
   },
   
