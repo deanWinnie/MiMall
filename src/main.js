@@ -4,11 +4,11 @@ import store from './store'
 import router from './router'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
-import env from './env'
+// import env from './env'
 
-// axios.defaults.baseURL='/api'; //跨域方式为代理的时候用这种方法 不然则要写全域名
+axios.defaults.baseURL='/api'; //跨域方式为代理的时候用这种方法 不然则要写全域名
 axios.defaults.timeout=8000;
-axios.defaults.baseURL=env.baseURL;
+// axios.defaults.baseURL=env.baseURL;
 console.log(process.env.NODE_ENV)
 
 //接口错误拦截
