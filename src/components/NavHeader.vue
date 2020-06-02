@@ -254,6 +254,7 @@ export default {
                         z-index: 10;
                         transition: all .5s;
                         overflow: hidden;
+                        background-color: #ffffff;
                         .product{
                             position: relative;
                             float: left;
