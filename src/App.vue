@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import storage from './storage/index.js'
+// import storage from './storage/index.js'
 export default {
   name:'app',
   components:{
@@ -16,10 +16,21 @@ export default {
     }
   },
   mounted(){
-    // storage.setItem('a',1,'user')
-    // storage.clear('a','user');
-    console.log(storage.getItem('user'));
+    this.getUser();
+    this.getCartCount();
   },
+  methods:{
+    getUser(){
+      this.axios.get('/user').then(()=>{
+
+      })
+    },
+    getCartCount(){
+      this.axios.get('/carts/products/sum').then(()=>{
+        
+      })
+    }
+  }
   
 }
 </script>
