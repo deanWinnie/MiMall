@@ -37,7 +37,7 @@
   </div>
 </template>
 <script>
-// import { mapActions } from 'vuex';
+import { mapActions } from 'vuex';
 export default {
   name: 'login',
   data(){
@@ -55,8 +55,8 @@ export default {
         password
       }).then((res)=>{
         this.$cookie.set('userId',res.id,{expires:'1M'});
-        // this.$store.dispatch('saveUserName',res.username);
-        // this.saveUserName(res.username);
+        // this.$store.dispatch('saveUserName',res.username);//vux方法一
+        this.saveUserName(res.username);//vux方法二
         // this.$router.push({
         //   name:'index',
         //   params:{
@@ -66,7 +66,7 @@ export default {
         this.$router.push('/index');
       })
     },
-    // ...mapActions(['saveUserName']),
+    ...mapActions(['saveUserName']),//vux方法二
     register(){
       this.axios.post('/user/register',{
         username:'dean',
