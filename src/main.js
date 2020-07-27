@@ -6,6 +6,8 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 import VueLazyLoad from 'vue-lazyload'
 import VueCookie from 'vue-cookie'
+import { Message } from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
 // import env from './env'
 
 axios.defaults.baseURL='/api'; //跨域方式为代理的时候用这种方法 不然则要写全域名
@@ -31,6 +33,7 @@ axios.interceptors.response.use(function(response){
 })
 Vue.use(VueAxios,axios)
 Vue.use(VueCookie)
+Vue.prototype.$message = Message
 Vue.use(VueLazyLoad,{
   loading:'/imgs/loading-svg/loading-bars.svg'
 })

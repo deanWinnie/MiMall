@@ -74,7 +74,7 @@ export default {
         email:'dean1025@163.com'
       }).then(()=>{
         // this.$message.success('注册成功');
-        alert('注册成功');
+        this.$message.success('注册成功');
       })
     }
   }
