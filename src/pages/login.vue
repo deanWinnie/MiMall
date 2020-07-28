@@ -54,16 +54,16 @@ export default {
         username,
         password
       }).then((res)=>{
-        this.$cookie.set('userId',res.id,{expires:'1M'});
+        this.$cookie.set('userId',res.id,{expires:'Session'});
         // this.$store.dispatch('saveUserName',res.username);//vux方法一
         this.saveUserName(res.username);//vux方法二
-        // this.$router.push({
-        //   name:'index',
-        //   params:{
-        //     from:'login'
-        //   }
-        // });
-        this.$router.push('/index');
+        this.$router.push({
+          name:'index',
+          params:{
+            from:'login'
+          }
+        });
+        // this.$router.push('/index');
       })
     },
     ...mapActions(['saveUserName']),//vux方法二
@@ -73,7 +73,6 @@ export default {
         password:'1025',
         email:'dean1025@163.com'
       }).then(()=>{
-        // this.$message.success('注册成功');
         this.$message.success('注册成功');
       })
     }
