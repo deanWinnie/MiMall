@@ -27,10 +27,14 @@ axios.interceptors.response.use(function(response){
     }
     return Promise.reject();
   }else{
-    alert(res.msg)
+    Message.warning(res.msg)
     return Promise.reject();
   }
-})
+},(error)=>{
+  let res=error.response;
+  Message.error(res.data.message);
+  return Promise.reject(error);
+});
 Vue.use(VueAxios,axios)
 Vue.use(VueCookie)
 Vue.prototype.$message = Message
