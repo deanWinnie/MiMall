@@ -22,7 +22,7 @@ input{
 .fr{
     float: right;
 }
-.clearfix:before,.clearfix:after{
+.clearfix:before,.clearfix:after{  //防止塌陷和清除浮动
     content: ' ';
     display: table;
 }
