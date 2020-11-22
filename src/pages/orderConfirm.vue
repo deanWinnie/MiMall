@@ -155,24 +155,15 @@
                 <input type="text" class="input" placeholder="手机号码" v-model="checkedItem.receiverMobile">
               </div>
               <div class="item">
-                <select name="province" v-model="checkedItem.receiverProvince">
-                  <option value="浙江">浙江</option>
-                  <option value="上海">上海</option>
-                  <option value="江苏">江苏</option>
+                <select name="province" v-model="checkedItem.receiverProvince" @click='changeProvince'>
+                
+                <option v-for="(item,index) in addressData" :key="index" :value="item.provinceName" >{{item.provinceName}}</option>
                 </select>
-                 <select name="city" v-model="checkedItem.receiverCity">
-                  <option value="杭州">杭州</option>
-                  <option value="上海">上海</option>
-                  <option value="南京">南京</option>
+                 <select name="city" v-model="checkedItem.receiverCity" @click="changeCity">
+                  <option v-for="(item,index) in addressDataCity" :key="index" :value="item.cityName" >{{item.cityName}}</option>
                 </select>
                  <select name="district" v-model="checkedItem.receiverDistrict">
-                    <option value="上城区">上城区</option>
-                    <option value="下城区">下城区</option>
-                    <option value="西湖区">西湖区</option>
-                    <option value="萧山区">萧山区</option>
-                    <option value="江干区">江干区</option>
-                    <option value="余杭区">余杭区</option>
-                    <option value="滨江区">滨江区</option>
+                    <option v-for="(item,index) in addressDataDistrict" :key="index" :value="item.areaName" >{{item.areaName}}</option>
                 </select>
               </div>
               <div class="item">
@@ -200,6 +191,7 @@
 <script>
 import Modal from './../components/Modal'
 import OrderHeader from './../components/OrderHeader'
+import Address from './../api/address.json'
 export default{
     name:'order-confirm',
     data(){
@@ -212,8 +204,10 @@ export default{
             userAction:'',//用户行为 0：新增 1：编辑 2：删除
             showDelModal:false,//是否显示删除弹框,
             showEditModal:false,//是否显示新增弹框
-            checkIndex:0//当前收货地址选中的索引
-
+            checkIndex:0,//当前收货地址选中的索引,
+            addressData:[],
+            addressDataCity:[],
+            addressDataDistrict:[]
         }
     },
     mounted(){
@@ -221,6 +215,24 @@ export default{
         this.getCartList();
     },
     methods:{
+      changeProvince(){
+        for(let i in this.addressData){
+          if(this.addressData[i].provinceName==this.checkedItem.receiverProvince){
+            this.addressDataCity=this.addressData[i].mallCityList;
+            this.checkedItem.receiverCity=this.addressData[i].mallCityList[0].cityName;
+            this.addressDataDistrict=this.addressData[i].mallCityList[0].mallAreaList;
+            this.checkedItem.receiverDistrict=this.addressData[i].mallCityList[0].mallAreaList[0].areaName;
+          }
+        }
+      },
+      changeCity(){
+        for(let i in this.addressDataCity){
+          if(this.addressDataCity[i].cityName==this.checkedItem.receiverCity){
+            this.addressDataDistrict=this.addressDataCity[i].mallAreaList;
+            this.checkedItem.receiverDistrict=this.addressDataCity[i].mallAreaList[0].areaName;
+          }
+        }
+      },
         getAddressList(){
             this.axios.get('/shippings').then((res)=>{
                 this.list=res.list;
@@ -231,6 +243,14 @@ export default{
           this.checkedItem={};
           this.userAction=0;
           this.showEditModal=true;
+          this.addressData= Address.Area;
+          this.addressDataCity=this.addressData[0].mallCityList;
+          this.addressDataDistrict=this.addressData[0].mallCityList[0].mallAreaList;
+          this.checkedItem.receiverProvince=this.addressData[0].provinceName;
+          this.checkedItem.receiverCity=this.addressDataCity[0].cityName;
+          this.checkedItem.receiverDistrict= this.addressDataDistrict[0].areaName;
+          console.log(this.checkedItem.receiverProvince);
+          console.log(Address.Area.provinceName);
         },
         //打开新增地址弹框
         editAddressModal(item){
@@ -263,9 +283,9 @@ export default{
                 errMsg='请输入收货人名称';
               }else if(!receiverMobile || !/\d{11}/.test(receiverMobile)){
                 errMsg='请输入正确格式的手机号';
-              }else if(!receiverProvince){
+              }else if(!receiverProvince||receiverProvince==="请选择省份"){
                 errMsg='请选择省份';
-              }else if(!receiverCity){
+              }else if(!receiverCity||receiverCity==="请选择城市"){
                 errMsg='请选择城市';
               }else if(!receiverDistrict || !receiverAddress){
                 errMsg='请输入收货地址';

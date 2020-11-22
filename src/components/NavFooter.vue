@@ -13,6 +13,9 @@
     <div class="copyRight">
         Copyright©2020 <div class="domain">deanwinnie.com</div> All Rights Reserved
     </div>
+    <div class="copyRight">
+        <a href="http://beian.miit.gov.cn">浙ICP备2020037814号-1</a>
+    </div>
 </div>
 </template>
 
@@ -62,6 +65,10 @@ export default {
         .domain {
             display: inline-block;
             color: $colorA;
+        }
+
+        a {
+            color: #999999;
         }
     }
 }
