@@ -4,7 +4,7 @@ module.exports={
         port:8080,
         proxy:{
             '/api':{
-                target:'http://mall-pre.springboot.cn',
+                target:'http://api-driver.marsview.cc/api/mall/',
                 chnageOrigin:true,
                 pathRewrite:{
                     '/api':''
